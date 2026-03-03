@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@import "./fonts.css";
+@import "./_variables.css";
+
+html {
+  @apply text-base;
+}
+
+body {
+  @apply font-pp-mori font-normal bg-[#F2F5F4] text-dark-primary;
+}
+
+p {
+  @apply text-xl max-lg:text-base text-pretty;
+}
+
+h2 {
+  @apply text-primary;
+}
+
+h4 {
+  @apply text-dark-primary font-bold text-2xl text-balance max-lg:text-xl;
+}
+
+section {
+  @apply lg:py-26 max-lg:py-16 relative;
+
+  .heading {
+    @apply lg:space-y-10 max-lg:space-y-4;
+    &.text-center > p {
+      @apply lg:max-w-[80%] lg:mx-auto;
+    }
+  }
+
+  h1 {
+    @apply font-albra font-medium text-7xl text-primary text-balance max-lg:text-3xl;
+  }
+
+  h2 {
+    @apply font-albra-book font-normal text-6xl text-balance max-lg:text-3xl;
+  }
+
+  &.bg-dark-primary .heading {
+    h2,
+    p {
+      @apply text-white;
+    }
+  }
+}
+
+.a-button {
+  @apply text-center bg-primary text-white font-semibold rounded-full pt-3 pb-2 px-10 transition inline-block;
+  &:hover {
+    @apply bg-secondary;
+  }
+  &.secondary {
+    @apply bg-secondary;
+    &:hover {
+      @apply bg-primary;
+    }
+  }
+  &.tertiary {
+    @apply bg-tertiary text-secondary;
+    &:hover {
+      @apply bg-secondary text-white;
+    }
+  }
+  &.dark {
+    @apply bg-dark-primary;
+    &:hover {
+      @apply bg-primary;
+    }
+  }
+}

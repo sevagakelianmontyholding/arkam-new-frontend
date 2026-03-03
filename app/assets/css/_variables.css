@@ -1,0 +1,17 @@
+@theme {
+  /*** FONTS ***/
+  --font-pp-mori: "PP Mori", sans-serif;
+  --font-albra: "Albra", sans-serif;
+  --font-albra-book: "Albra Book", sans-serif;
+
+  /*** COLORS ***/
+  --color-primary: #103b50;
+  --color-secondary: #01a6a6;
+  --color-tertiary: #e0f4f2;
+  --color-dark-primary: #0b1f2a;
+}
+
+@utility container {
+  margin-inline: auto; /* centers */
+  padding-inline: 1rem; /* optional side padding */
+}
