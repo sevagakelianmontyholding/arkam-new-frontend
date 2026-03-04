@@ -9,6 +9,7 @@
   --color-secondary: #01a6a6;
   --color-tertiary: #e0f4f2;
   --color-dark-primary: #0b1f2a;
+  --color-dark-bg: #0a0b16;
 }
 
 @utility container {
