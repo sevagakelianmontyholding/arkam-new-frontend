@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply font-pp-mori font-normal bg-[#F2F5F4] text-dark-primary;
+  @apply font-pp-mori font-normal bg-background text-dark-primary;
 }
 
 p {

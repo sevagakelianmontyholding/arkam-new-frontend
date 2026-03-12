@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <NuxtLink to="/" class="block">
     <svg
       width="174"
       height="38"
@@ -39,7 +39,7 @@
         </clipPath>
       </defs>
     </svg>
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup></script>

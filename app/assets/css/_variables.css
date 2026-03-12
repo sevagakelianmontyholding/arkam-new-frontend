@@ -5,11 +5,14 @@
   --font-albra-book: "Albra Book", sans-serif;
 
   /*** COLORS ***/
+  --color-background: #f9fafc;
   --color-primary: #103b50;
   --color-secondary: #01a6a6;
   --color-tertiary: #e0f4f2;
   --color-dark-primary: #0b1f2a;
   --color-dark-bg: #0a0b16;
+
+  --header-height: 100px;
 }
 
 @utility container {

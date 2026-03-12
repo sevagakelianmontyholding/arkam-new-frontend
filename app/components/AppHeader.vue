@@ -1,18 +1,14 @@
 <template>
-    <header class="h-[100px]">
-        <div class="container h-full flex justify-between items-center">
-            <Logo />
-            <Hamburger />
-        </div>
-    </header>
+  <header class="h-(--header-height) fixed top-0 w-full z-10 bg-background">
+    <div class="container h-full flex justify-between items-center">
+      <Logo />
+      <Hamburger />
+    </div>
+  </header>
 </template>
 
 <script setup>
-import Hamburger from './Hamburger.vue';
-
-
+import Hamburger from "./Hamburger.vue";
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

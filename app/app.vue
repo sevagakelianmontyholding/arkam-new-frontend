@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-(--header-height)">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
