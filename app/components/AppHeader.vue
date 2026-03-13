@@ -1,5 +1,5 @@
 <template>
-  <header class="h-(--header-height) fixed top-0 w-full z-10 bg-background">
+  <header class="h-(--header-height) absolute top-0 w-full z-10 bg-background">
     <div class="container h-full flex justify-between items-center">
       <Logo />
       <Hamburger />

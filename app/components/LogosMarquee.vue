@@ -1,13 +1,17 @@
 <template>
-  <div class="relative overflow-hidden bg-[#F2F5F4]">
+  <div class="relative overflow-hidden bg-background">
     <!-- Fade edges -->
     <div
       class="pointer-events-none absolute inset-0 z-10"
-      style="background: linear-gradient(to right,
-        #F2F5F4 0%,
-        rgba(242,245,244,0) 12%,
-        rgba(242,245,244,0) 88%,
-        #F2F5F4 100%);"
+      style="
+        background: linear-gradient(
+          to right,
+          #f9fafc 0%,
+          rgba(242, 245, 244, 0) 12%,
+          rgba(242, 245, 244, 0) 88%,
+          #f9fafc 100%
+        );
+      "
     />
 
     <!-- Marquee -->
@@ -15,11 +19,23 @@
       <div class="marquee__inner">
         <!-- Group A -->
         <div class="marquee__group">
-          <img class="w-auto" src="~/assets/img/montycapital.svg" alt="Monty Capital" />
+          <img
+            class="w-auto"
+            src="~/assets/img/montycapital.svg"
+            alt="Monty Capital"
+          />
           <img class="w-auto" src="~/assets/img/mymonty.svg" alt="MyMonty" />
           <img class="w-auto" src="~/assets/img/montypay.svg" alt="MontyPay" />
-          <img class="w-auto" src="~/assets/img/montyfinance.svg" alt="Monty Finance" />
-          <img class="w-auto" src="~/assets/img/montyesim.svg" alt="Monty eSIM" />
+          <img
+            class="w-auto"
+            src="~/assets/img/montyfinance.svg"
+            alt="Monty Finance"
+          />
+          <img
+            class="w-auto"
+            src="~/assets/img/montyesim.svg"
+            alt="Monty eSIM"
+          />
         </div>
 
         <!-- Group B (duplicate) -->
@@ -38,8 +54,8 @@
 <style scoped>
 /* tweak these */
 .marquee {
-  --gap: 4rem;       /* spacing between logos */
-  --duration: 15s;   /* speed */
+  --gap: 4rem; /* spacing between logos */
+  --duration: 15s; /* speed */
 }
 
 .marquee__inner {
@@ -56,15 +72,23 @@
   display: flex;
   align-items: center;
   gap: var(--gap);
-  padding-inline: calc(var(--gap)/2); /* IMPORTANT: same space at the start and end */
+  padding-inline: calc(
+    var(--gap) / 2
+  ); /* IMPORTANT: same space at the start and end */
 }
 
 @keyframes marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee__inner { animation: none; }
+  .marquee__inner {
+    animation: none;
+  }
 }
 </style>

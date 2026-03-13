@@ -17,5 +17,12 @@
 
 @utility container {
   margin-inline: auto; /* centers */
-  padding-inline: 1rem; /* optional side padding */
+  padding-inline: 16px; /* optional side padding */
+}
+
+/* mobile + tablet */
+@media (max-width: 1023px) {
+  :root {
+    --header-height: 70px;
+  }
 }

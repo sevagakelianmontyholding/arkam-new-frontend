@@ -1,5 +1,5 @@
 <template>
-  <section class="lg:py-16!">
+  <section class="hero lg:pb-16!">
     <div class="container">
       <div class="text-center heading">
         <h1>One Composable Platform for Digital Banking & Super-App Finance</h1>

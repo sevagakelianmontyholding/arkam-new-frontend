@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="pt-16">
     <div class="container">
       <div
         class="flex justify-between max-lg:flex-col max-lg:gap-8 lg:gap-12 xl:gap-32"
@@ -60,12 +60,12 @@
         </div>
       </div>
 
-      <div class="divider mt-20! mb-0!"></div>
+      <div class="divider lg:mt-20! mb-0!"></div>
 
       <div
         class="flex lg:items-center lg:justify-between max-lg:flex-col gap-6 py-8 max-lg:items-center text-center"
       >
-        <NuxtLink to="/"><Logo /></NuxtLink>
+        <Logo />
         <div class="flex max-lg:flex-col gap-6 text-base">
           <NuxtLink to="/">Terms</NuxtLink>
           <NuxtLink to="/">Privacy</NuxtLink>

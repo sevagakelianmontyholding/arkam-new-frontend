@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./fonts.css";
 @import "./_variables.css";
+@import "./container_alignment.css";
 
 html {
   @apply text-base;
@@ -31,8 +32,10 @@ h4 {
 }
 
 section {
-  @apply lg:py-26 max-lg:py-16 relative;
-
+  @apply lg:py-26 max-lg:py-10 relative;
+  &.hero {
+    @apply lg:pt-16 lg:pb-26;
+  }
   .heading {
     @apply lg:space-y-10 max-lg:space-y-4;
     &.text-center > p {
@@ -57,7 +60,7 @@ section {
 }
 
 .a-button {
-  @apply text-center bg-primary text-white font-semibold rounded-full pt-3 pb-2 px-10 transition inline-block;
+  @apply text-center bg-primary text-white font-semibold rounded-full pt-3 pb-2 px-10 transition inline-block max-lg:w-full;
   &:hover {
     @apply bg-secondary text-white;
   }
