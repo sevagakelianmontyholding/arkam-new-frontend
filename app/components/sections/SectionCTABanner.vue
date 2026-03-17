@@ -1059,18 +1059,30 @@
           </svg>
         </div>
         <div class="heading relative z-10 text-center lg:max-w-[80%]">
-          <h2 class="text-white!">
-            See how Arkam Core fits your digital banking strategy
-          </h2>
-          <NuxtLink to="/" class="a-button secondary"
-            >Book a live Demo</NuxtLink
+          <h2 class="text-white!">{{ title }}</h2>
+          <p class="text-white!" v-if="description">{{ description }}</p>
+          <div
+            v-if="buttonOne || buttonTwo"
+            class="flex max-lg:flex-col gap-6 justify-center items-center"
           >
+            <NuxtLink
+              v-if="buttonOne"
+              :to="buttonOne.link"
+              class="a-button secondary"
+              >{{ buttonOne.text }}</NuxtLink
+            >
+            <NuxtLink v-if="buttonTwo" :to="buttonTwo.link" class="a-button">{{
+              buttonTwo.text
+            }}</NuxtLink>
+          </div>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps(["title", "description", "buttonOne", "buttonTwo"]);
+</script>
 
 <style lang="scss" scoped></style>

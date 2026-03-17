@@ -1,15 +1,12 @@
 <template>
   <section class="hero">
-    <div class="container">
-      <div class="heading text-center">
+    <div
+      class="container flex max-lg:flex-col lg:justify-between lg:gap-32 max-lg:gap-6 items-center"
+    >
+      <div class="heading w-full">
         <h1>{{ title }}</h1>
-        <p>
-          {{ description }}
-        </p>
-        <div
-          v-if="buttonOne || buttonTwo"
-          class="flex max-lg:flex-col gap-6 justify-center items-center"
-        >
+        <p>{{ description }}</p>
+        <div v-if="buttonOne || buttonTwo" class="flex max-lg:flex-col gap-6">
           <NuxtLink
             v-if="buttonOne"
             :to="buttonOne.link"
@@ -24,17 +21,21 @@
           >
         </div>
       </div>
+      <div class="w-full">
+        <img :src="image" />
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
-const props = defineProps({
-  title: String,
-  description: String,
-  buttonOne: Object,
-  buttonTwo: Object,
-});
+const props = defineProps([
+  "title",
+  "description",
+  "image",
+  "buttonOne",
+  "buttonTwo",
+]);
 </script>
 
 <style lang="scss" scoped></style>

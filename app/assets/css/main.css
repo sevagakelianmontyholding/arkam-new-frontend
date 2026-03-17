@@ -24,11 +24,14 @@ h2 {
 }
 
 h4 {
-  @apply text-dark-primary font-bold text-2xl text-balance max-lg:text-xl;
+  @apply text-dark-primary font-bold text-2xl  max-lg:text-xl;
 }
 
 .divider {
   @apply bg-[#103B50]/20 h-px w-full lg:my-8 max-lg:my-4;
+  &.dark {
+    @apply bg-[#ffffff]/20;
+  }
 }
 
 section {

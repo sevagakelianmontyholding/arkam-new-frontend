@@ -6,13 +6,9 @@
       >
         <div class="lg:w-2/5">
           <div class="heading">
-            <h2>Interest Credit & Capitalization Aligned to Your Policy</h2>
+            <h2>{{ title }}</h2>
             <p>
-              Different products require different treatment of earned interest.
-              Arkam supports configurable interest crediting and capitalization
-              behavior so banks can align deposit products with policy and
-              customer expectations—while maintaining consistent accounting
-              entries and statement visibility.
+              {{ description }}
             </p>
           </div>
         </div>
@@ -44,7 +40,12 @@
                   stroke-linejoin="round"
                 />
               </svg>
-              <p>{{ item.title }}</p>
+              <div>
+                <p class="font-semibold">{{ item.title }}</p>
+                <p v-if="item.description" class="mt-2">
+                  {{ item.description }}
+                </p>
+              </div>
             </div>
 
             <div
@@ -59,17 +60,7 @@
 </template>
 
 <script setup>
-const items = [
-  {
-    title: "Integration-First Delivery",
-  },
-  {
-    title: "Phased Rollout (Alongside Legacy Core)",
-  },
-  {
-    title: "Governance + Audibility Emphasis",
-  },
-];
+const props = defineProps(["title", "description", "items"]);
 </script>
 
 <style lang="scss" scoped></style>
