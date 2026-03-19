@@ -2,7 +2,7 @@
   <HomeBanner />
   <HomeCoreBanking />
   <HomeTechnology />
-  <HomeDBP />
+  <!-- <HomeDBP /> -->
   <HomeTrustedBy />
   <HomeFeaturedInsights />
   <HomePlatform />
