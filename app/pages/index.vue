@@ -1,6 +1,6 @@
 <template>
   <HomeBanner />
-  <!-- <HomeCoreBanking /> -->
+  <HomeCoreBanking />
   <HomeTechnology />
   <HomeDBP />
   <HomeTrustedBy />

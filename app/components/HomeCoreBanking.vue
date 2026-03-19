@@ -32,7 +32,7 @@
             </svg>
           </div>
           <div
-            class="space-y-12 lg:absolute top-0 right-0 left-0 lg:translate-y-full lg:pl-15"
+            class="space-y-12 lg:absolute top-0 right-0 left-0 lg:pl-15"
             ref="scrollOne"
           >
             <div class="feature space-y-6">
@@ -270,74 +270,212 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted, nextTick } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 gsap.registerPlugin(ScrollTrigger);
 
-const mm = gsap.matchMedia();
-
 const clip = ref(null);
-const sectionOne = ref();
-const scrollOne = ref();
-let ctx;
+const sectionOne = ref(null);
+const scrollOne = ref(null);
 
-onMounted(() => {
-  mm.add("(min-width: 1024px)", () => {
-    ctx = gsap.context((self) => {
-      const wrap = clip.value;
-      const el = scrollOne.value;
+let mm = null;
+let ctx = null;
+let observer = null;
+let resizeTimer = null;
+let initTimer = null;
 
-      // smooth setter (acts like scrub duration)
-      const setY = gsap.quickTo(el, "y", {
-        duration: 1, // 👈 this is your "scrub 2"
-        ease: "power3.out",
-      });
+function clearInlineStyles() {
+  const icons = sectionOne.value
+    ? Array.from(sectionOne.value.querySelectorAll(".icon"))
+    : [];
 
-      ScrollTrigger.create({
-        trigger: sectionOne.value,
-        pin: true,
-        start: "top top",
-        end: "+=3000",
-        scrub: false, // not needed now
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const wrapH = wrap.clientHeight;
-          const elH = el.offsetHeight;
-
-          const startY = wrapH;
-          const endY = wrapH - elH;
-
-          const y = startY + (endY - startY) * self.progress;
-          setY(y); // ✅ smooth
-        },
-        // markers: true,
-      });
-
-      const features = self.selector(".feature");
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const icon = entry.target.querySelector(".icon");
-
-            if (entry.isIntersecting) {
-              gsap.to(icon, { scale: 1, duration: 0.4, ease: "power2.out" });
-            }
-          });
-        },
-        {
-          root: clip.value,
-          threshold: 0.5,
-        },
-      );
-
-      features.forEach((feature) => observer.observe(feature));
-    }, sectionOne.value);
+  gsap.set([scrollOne.value, ...icons].filter(Boolean), {
+    clearProps: "all",
   });
+}
+
+function killOwnScrollTriggers() {
+  const section = sectionOne.value;
+  if (!section) return;
+
+  ScrollTrigger.getAll().forEach((st) => {
+    const trigger = st.trigger;
+    const pin = st.pin;
+
+    if (trigger === section || pin === section) {
+      st.kill();
+    }
+  });
+}
+
+function cleanup() {
+  clearTimeout(resizeTimer);
+  clearTimeout(initTimer);
+  window.removeEventListener("resize", handleResize);
+
+  observer?.disconnect();
+  observer = null;
+
+  killOwnScrollTriggers();
+  ctx?.revert();
+  mm?.revert();
+
+  ctx = null;
+  mm = null;
+}
+
+function getMetrics() {
+  const wrap = clip.value;
+  const el = scrollOne.value;
+
+  if (!wrap || !el) {
+    return {
+      wrapH: 0,
+      elH: 0,
+      distance: 0,
+      startY: 0,
+      endY: 0,
+    };
+  }
+
+  const wrapH = wrap.clientHeight;
+  const elH = el.scrollHeight;
+  const distance = Math.max(0, elH - wrapH);
+  const startY = wrapH;
+  const endY = wrapH - elH;
+
+  return { wrapH, elH, distance, startY, endY };
+}
+
+function initDesktop() {
+  const section = sectionOne.value;
+  const wrap = clip.value;
+  const el = scrollOne.value;
+
+  if (!section || !wrap || !el) return;
+
+  killOwnScrollTriggers();
+  observer?.disconnect();
+  observer = null;
+  ctx?.revert();
+
+  ctx = gsap.context((self) => {
+    const icons = self.selector(".icon");
+    const features = self.selector(".feature");
+
+    ScrollTrigger.saveStyles([el, ...icons]);
+
+    const initial = getMetrics();
+    gsap.set(el, { y: initial.startY });
+    gsap.set(icons, { scale: 0 });
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: () => {
+        const { distance } = getMetrics();
+        return `+=${distance + window.innerHeight * 0.35}`;
+      },
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      refreshPriority: 2,
+      onUpdate: (self) => {
+        const { startY, endY } = getMetrics();
+        const y = startY + (endY - startY) * self.progress;
+        gsap.set(el, { y });
+      },
+      onRefreshInit: () => {
+        const { startY } = getMetrics();
+        gsap.set(el, { y: startY });
+      },
+    });
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const icon = entry.target.querySelector(".icon");
+          if (!icon) return;
+
+          if (entry.isIntersecting) {
+            gsap.to(icon, {
+              scale: 1,
+              duration: 0.4,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          } else {
+            gsap.to(icon, {
+              scale: 0,
+              duration: 0.25,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          }
+        });
+      },
+      {
+        root: wrap,
+        threshold: 0.5,
+      },
+    );
+
+    features.forEach((feature) => observer.observe(feature));
+  }, sectionOne.value);
+
+  ScrollTrigger.refresh();
+}
+
+function handleResize() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 150);
+}
+
+onMounted(async () => {
+  await nextTick();
+
+  initTimer = setTimeout(() => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        mm = gsap.matchMedia();
+
+        mm.add("(min-width: 1024px)", () => {
+          initDesktop();
+          window.addEventListener("resize", handleResize);
+
+          return () => {
+            window.removeEventListener("resize", handleResize);
+            observer?.disconnect();
+            observer = null;
+            killOwnScrollTriggers();
+            ctx?.revert();
+          };
+        });
+
+        mm.add("(max-width: 1023px)", () => {
+          observer?.disconnect();
+          observer = null;
+          killOwnScrollTriggers();
+          clearInlineStyles();
+
+          return () => {
+            clearInlineStyles();
+          };
+        });
+
+        ScrollTrigger.refresh();
+      });
+    });
+  }, 0);
 });
 
 onUnmounted(() => {
-  ctx?.revert();
+  cleanup();
 });
 </script>
 
