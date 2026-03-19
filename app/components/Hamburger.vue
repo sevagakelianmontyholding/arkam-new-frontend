@@ -1,15 +1,48 @@
 <template>
-    <svg width="30" height="18" viewBox="0 0 30 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="1" y1="9" x2="29" y2="9" stroke="#103B50" stroke-width="2" stroke-linecap="round"/>
-        <line x1="1" y1="1" x2="29" y2="1" stroke="#103B50" stroke-width="2" stroke-linecap="round"/>
-        <line x1="1" y1="17" x2="29" y2="17" stroke="#103B50" stroke-width="2" stroke-linecap="round"/>
+  <button
+    type="button"
+    aria-label="Open menu"
+    class="flex items-center justify-center cursor-pointer"
+    @click="$emit('click')"
+  >
+    <svg
+      width="30"
+      height="18"
+      viewBox="0 0 30 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line
+        x1="1"
+        y1="9"
+        x2="29"
+        y2="9"
+        stroke="#103B50"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <line
+        x1="1"
+        y1="1"
+        x2="29"
+        y2="1"
+        stroke="#103B50"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <line
+        x1="1"
+        y1="17"
+        x2="29"
+        y2="17"
+        stroke="#103B50"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
     </svg>
+  </button>
 </template>
 
 <script setup>
-
+defineEmits(["click"]);
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -31,6 +31,17 @@ import SectionCTABanner from "../components/sections/SectionCTABanner.vue";
 import SectionTextIconList from "../components/sections/SectionTextIconList.vue";
 import SectionTextList from "../components/sections/SectionTextList.vue";
 
+useSeoMeta({
+  title: "Arkam",
+  ogTitle: "Arkam",
+  description:
+    "One Composable Platform for Digital Banking & Super-App Finance",
+  ogDescription:
+    "One Composable Platform for Digital Banking & Super-App Finance",
+  // ogImage: "https://example.com/image.png",
+  // twitterCard: "summary_large_image",
+});
+
 const faq = [
   {
     title: "Is Arkam a cloud-only solution?",

@@ -3,8 +3,12 @@
     <div>
       <div v-for="(item, index) in items" :key="index">
         <div class="space-y-2">
-          <h4 :class="dark && 'text-white!'">{{ item.title }}</h4>
-          <p :class="dark && 'text-white!'">{{ item.description }}</p>
+          <h4 v-if="item.title" :class="dark && 'text-white!'">
+            {{ item.title }}
+          </h4>
+          <p v-if="item.description" :class="dark && 'text-white!'">
+            {{ item.description }}
+          </p>
         </div>
 
         <div

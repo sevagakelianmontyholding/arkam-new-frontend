@@ -29,6 +29,17 @@ import SectionTextListImage from "../../../components/sections/SectionTextListIm
 import SectionTextList from "../../../components/sections/SectionTextList.vue";
 import ArkamCoreBankingInAction from "../../../components/ArkamCoreBankingInAction.vue";
 
+useSeoMeta({
+  title: "Arkam - Tariffs and Fees",
+  ogTitle: "Arkam - Tariffs and Fees",
+  description:
+    "Tariffs and fees are central to how products generate revenue and must be handled transparently. Arkam centralizes fee and interest rules so pricing can be controlled in one place and applied consistently across products and channels.",
+  ogDescription:
+    "Tariffs and fees are central to how products generate revenue and must be handled transparently. Arkam centralizes fee and interest rules so pricing can be controlled in one place and applied consistently across products and channels.",
+  // ogImage: "https://example.com/image.png",
+  // twitterCard: "summary_large_image",
+});
+
 const keyPoints = [
   {
     title: "Central Tariff Catalogue",

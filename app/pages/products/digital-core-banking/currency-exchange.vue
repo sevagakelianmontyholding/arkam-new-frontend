@@ -29,6 +29,17 @@ import SectionTextListImage from "../../../components/sections/SectionTextListIm
 import SectionTextList from "../../../components/sections/SectionTextList.vue";
 import ArkamCoreBankingInAction from "../../../components/ArkamCoreBankingInAction.vue";
 
+useSeoMeta({
+  title: "Arkam - Currency Exchange",
+  ogTitle: "Arkam - Currency Exchange",
+  description:
+    "Currency exchange logic connects accounts, FX rates and accounting so cross-currency flows are handled consistently. Institutions can apply their chosen FX sources and rules while ensuring that balances and postings remain accurate.",
+  ogDescription:
+    "Currency exchange logic connects accounts, FX rates and accounting so cross-currency flows are handled consistently. Institutions can apply their chosen FX sources and rules while ensuring that balances and postings remain accurate.",
+  // ogImage: "https://example.com/image.png",
+  // twitterCard: "summary_large_image",
+});
+
 const keyPoints = [
   {
     title: "Use of Reference FX Rates",

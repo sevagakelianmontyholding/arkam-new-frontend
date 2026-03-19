@@ -29,7 +29,17 @@
 import HeroTextImage from "../../../components/hero/HeroTextImage.vue";
 import SectionTextListImage from "../../../components/sections/SectionTextListImage.vue";
 import SectionTextList from "../../../components/sections/SectionTextList.vue";
-import SectionCTABanner from "../../../components/sections/SectionCTABanner.vue";
+
+useSeoMeta({
+  title: "Arkam - Financial Accounting and Reporting",
+  ogTitle: "Arkam - Financial Accounting and Reporting",
+  description:
+    "Financial control depends on every core event being reflected accurately in the books. Arkam links operational activity to a multi-entity, multi-currency accounting framework that provides real-time visibility for finance and risk teams.",
+  ogDescription:
+    "Financial control depends on every core event being reflected accurately in the books. Arkam links operational activity to a multi-entity, multi-currency accounting framework that provides real-time visibility for finance and risk teams.",
+  // ogImage: "https://example.com/image.png",
+  // twitterCard: "summary_large_image",
+});
 
 const keyPoints = [
   {

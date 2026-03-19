@@ -49,6 +49,17 @@ import SectionTextIconList from "../../../../components/sections/SectionTextIcon
 import SectionTextListImageItems from "../../../../components/sections/SectionTextListImageItems.vue";
 import SectionTextList from "../../../../components/sections/SectionTextList.vue";
 
+useSeoMeta({
+  title: "Arkam - Interest Based Accounts",
+  ogTitle: "Arkam - Interest Based Accounts",
+  description:
+    "Arkam’s Digital Core Banking system supports savings and term-deposit products with configurable interest policies. Banks define accrual and capitalization rules at product level, and the platform executes them automatically keeping balances accurate, statements clear, and reporting consistent for operations and finance teams, without custom code for each variation.",
+  ogDescription:
+    "Arkam’s Digital Core Banking system supports savings and term-deposit products with configurable interest policies. Banks define accrual and capitalization rules at product level, and the platform executes them automatically keeping balances accurate, statements clear, and reporting consistent for operations and finance teams, without custom code for each variation.",
+  // ogImage: "https://example.com/image.png",
+  // twitterCard: "summary_large_image",
+});
+
 const SavingsAndTermDeposits = [
   {
     title: "Savings and Term Deposits",

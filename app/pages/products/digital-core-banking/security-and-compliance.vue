@@ -27,8 +27,18 @@
 import HeroTextImage from "../../../components/hero/HeroTextImage.vue";
 import SectionTextListImage from "../../../components/sections/SectionTextListImage.vue";
 import SectionTextList from "../../../components/sections/SectionTextList.vue";
-import SectionCTABanner from "../../../components/sections/SectionCTABanner.vue";
 import ArkamCoreBankingInAction from "../../../components/ArkamCoreBankingInAction.vue";
+
+useSeoMeta({
+  title: "Arkam - Security and Compliance",
+  ogTitle: "Arkam - Security and Compliance",
+  description:
+    "Security and compliance expectations reach all the way into the core. Arkam incorporates access control, auditability and integration points with compliance tools so account-related processes can be governed and monitored effectively, aligned with your IT and regulatory frameworks.",
+  ogDescription:
+    "Security and compliance expectations reach all the way into the core. Arkam incorporates access control, auditability and integration points with compliance tools so account-related processes can be governed and monitored effectively, aligned with your IT and regulatory frameworks.",
+  // ogImage: "https://example.com/image.png",
+  // twitterCard: "summary_large_image",
+});
 
 const keyPoints = [
   {

@@ -20,6 +20,17 @@ import HeroTextOnly from "../../../../components/hero/HeroTextOnly.vue";
 import SectionTextImageFull from "../../../../components/sections/SectionTextImageFull.vue";
 import SectionTextListImageItems from "../../../../components/sections/SectionTextListImageItems.vue";
 
+useSeoMeta({
+  title: "Arkam - Multi-Currency Accounts",
+  ogTitle: "Arkam - Multi-Currency Accounts",
+  description:
+    "Arkam’s Digital Core Banking system enables banks to manage multi-currency balances with consistent controls across channels, operations and finance. The platform supports global account management, instant IBAN allocation, and account segmentation so institutions can scale cross-border propositions while keeping governance, reporting and auditability intact.",
+  ogDescription:
+    "Arkam’s Digital Core Banking system enables banks to manage multi-currency balances with consistent controls across channels, operations and finance. The platform supports global account management, instant IBAN allocation, and account segmentation so institutions can scale cross-border propositions while keeping governance, reporting and auditability intact.",
+  // ogImage: "https://example.com/image.png",
+  // twitterCard: "summary_large_image",
+});
+
 const AlternateSections = [
   {
     title: "Global Account Management Across Currencies and Segments",

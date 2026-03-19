@@ -2,7 +2,6 @@
   <section
     ref="bankingSection"
     class="relative overflow-hidden lg:min-h-screen"
-    :style="{ backgroundColor: activeItem.bg }"
   >
     <div class="container">
       <div class="heading lg:w-1/2">
@@ -21,7 +20,6 @@
           :class="{ 'pointer-events-none': activeIndex !== index }"
           :ref="(el) => setSlideRef(el, index)"
         >
-          <!-- content -->
           <div class="slide-content" :ref="(el) => setContentRef(el, index)">
             <div class="space-y-6">
               <p>{{ item.number }}</p>
@@ -38,7 +36,6 @@
             </div>
           </div>
 
-          <!-- image -->
           <div
             class="slide-image bg-[#F6F9F8] rounded-4xl p-12 w-full h-full flex items-center justify-center"
             :ref="(el) => setImageRef(el, index)"
@@ -62,19 +59,16 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, nextTick } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const mm = gsap.matchMedia();
-
 const bankingSection = ref(null);
 const slideRefs = ref([]);
 const contentRefs = ref([]);
 const imageRefs = ref([]);
-let ctx;
 
 const items = ref([
   {
@@ -116,7 +110,6 @@ const items = ref([
 ]);
 
 const activeIndex = ref(0);
-const activeItem = computed(() => items.value[activeIndex.value]);
 
 const setSlideRef = (el, index) => {
   if (el) slideRefs.value[index] = el;
@@ -130,140 +123,223 @@ const setImageRef = (el, index) => {
   if (el) imageRefs.value[index] = el;
 };
 
-onMounted(() => {
-  mm.add("(min-width: 1024px)", () => {
-    ctx = gsap.context(() => {
-      const section = bankingSection.value;
-      const slides = slideRefs.value;
-      const contents = contentRefs.value;
-      const images = imageRefs.value;
+let mm;
+let ctx;
+let resizeTimer;
 
-      slides.forEach((slide, i) => {
-        gsap.set(slide, {
-          autoAlpha: i === 0 ? 1 : 0,
-        });
+function clearAllInlineStyles() {
+  gsap.set(
+    [
+      bankingSection.value,
+      ...slideRefs.value,
+      ...contentRefs.value,
+      ...imageRefs.value,
+    ],
+    { clearProps: "all" },
+  );
+}
+
+function initDesktop() {
+  ctx?.revert();
+
+  ctx = gsap.context(() => {
+    const section = bankingSection.value;
+    const slides = slideRefs.value;
+    const contents = contentRefs.value;
+    const images = imageRefs.value;
+
+    if (!section || !slides.length) return;
+
+    // Save original styles so matchMedia cleanup can restore properly
+    ScrollTrigger.saveStyles([section, ...slides, ...contents, ...images]);
+
+    activeIndex.value = 0;
+
+    gsap.set(section, {
+      backgroundColor: items.value[0].bg,
+    });
+
+    slides.forEach((slide, i) => {
+      gsap.set(slide, {
+        autoAlpha: i === 0 ? 1 : 0,
+        zIndex: items.value.length - i,
       });
+    });
 
-      contents.forEach((el, i) => {
-        gsap.set(el, {
-          autoAlpha: i === 0 ? 1 : 0,
-          y: i === 0 ? 0 : 24,
-        });
+    contents.forEach((el, i) => {
+      gsap.set(el, {
+        autoAlpha: i === 0 ? 1 : 0,
+        y: i === 0 ? 0 : 30,
       });
+    });
 
-      images.forEach((el, i) => {
-        gsap.set(el, {
-          autoAlpha: i === 0 ? 1 : 0,
-          y: i === 0 ? 0 : 24,
-          scale: i === 0 ? 1 : 0.96,
-        });
+    images.forEach((el, i) => {
+      gsap.set(el, {
+        autoAlpha: i === 0 ? 1 : 0,
+        y: i === 0 ? 0 : 30,
+        scale: i === 0 ? 1 : 0.96,
       });
+    });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: `+=${items.value.length * 1000}`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
+    const segment = 1; // one timeline unit per panel
+    const totalSegments = items.value.length - 1;
+
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: () => `+=${window.innerHeight * totalSegments}`,
+        scrub: 1,
+        pin: true,
+        invalidateOnRefresh: true,
+        onRefresh: () => {
+          // Keep progress and measurements fresh after resize
         },
-      });
+        onUpdate: (self) => {
+          const raw = self.progress * totalSegments;
+          const index = Math.min(
+            items.value.length - 1,
+            Math.max(0, Math.round(raw)),
+          );
+          activeIndex.value = index;
+        },
+      },
+    });
 
-      items.value.forEach((item, index) => {
-        if (index === 0) return;
+    for (let i = 1; i < items.value.length; i++) {
+      const prevContent = contents[i - 1];
+      const nextContent = contents[i];
+      const prevImage = images[i - 1];
+      const nextImage = images[i];
+      const prevSlide = slides[i - 1];
+      const nextSlide = slides[i];
 
-        const prevSlide = slides[index - 1];
-        const nextSlide = slides[index];
-        const prevContent = contents[index - 1];
-        const nextContent = contents[index];
-        const prevImage = images[index - 1];
-        const nextImage = images[index];
+      const start = (i - 1) * segment;
 
-        tl.addLabel(`step-${index}`);
+      // background transition
+      tl.to(
+        section,
+        {
+          backgroundColor: items.value[i].bg,
+          duration: 0.35,
+        },
+        start,
+      );
 
-        tl.to(
-          section,
-          {
-            backgroundColor: item.bg,
-            duration: 0.5,
-            onStart: () => {
-              activeIndex.value = index;
-            },
-            onReverseComplete: () => {
-              activeIndex.value = index - 1;
-            },
-          },
-          `step-${index}`,
-        );
+      // outgoing
+      tl.to(
+        prevContent,
+        {
+          autoAlpha: 0,
+          y: -24,
+          duration: 0.25,
+        },
+        start,
+      );
 
-        tl.to(
-          prevContent,
-          {
-            autoAlpha: 0,
-            y: -24,
-            duration: 0.35,
-            ease: "power2.out",
-          },
-          `step-${index}`,
-        );
+      tl.to(
+        prevImage,
+        {
+          autoAlpha: 0,
+          y: -24,
+          scale: 0.96,
+          duration: 0.25,
+        },
+        start,
+      );
 
-        tl.to(
-          prevImage,
-          {
-            autoAlpha: 0,
-            y: -20,
-            scale: 0.96,
-            duration: 0.4,
-            ease: "power2.out",
-          },
-          `step-${index}`,
-        );
+      // hide previous / show next slightly later
+      tl.to(
+        prevSlide,
+        {
+          autoAlpha: 0,
+          duration: 0.01,
+        },
+        start + 0.24,
+      );
 
-        tl.set(prevSlide, { autoAlpha: 0 }, `step-${index}+=0.2`);
+      tl.to(
+        nextSlide,
+        {
+          autoAlpha: 1,
+          duration: 0.01,
+        },
+        start + 0.24,
+      );
 
-        tl.set(nextSlide, { autoAlpha: 1 }, `step-${index}+=0.2`);
+      // incoming
+      tl.fromTo(
+        nextContent,
+        {
+          autoAlpha: 0,
+          y: 24,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.28,
+        },
+        start + 0.24,
+      );
 
-        tl.fromTo(
-          nextContent,
-          {
-            autoAlpha: 0,
-            y: 24,
-          },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.45,
-            ease: "power2.out",
-          },
-          `step-${index}+=0.2`,
-        );
+      tl.fromTo(
+        nextImage,
+        {
+          autoAlpha: 0,
+          y: 24,
+          scale: 1.02,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.3,
+        },
+        start + 0.24,
+      );
+    }
 
-        tl.fromTo(
-          nextImage,
-          {
-            autoAlpha: 0,
-            y: 24,
-            scale: 1.02,
-          },
-          {
-            autoAlpha: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.5,
-            ease: "power2.out",
-          },
-          `step-${index}+=0.24`,
-        );
+    ScrollTrigger.refresh();
+  }, bankingSection.value);
+}
 
-        tl.to({}, { duration: 0.6 });
-      });
-    }, bankingSection.value);
+function handleResize() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 150);
+}
+
+onMounted(async () => {
+  await nextTick();
+
+  mm = gsap.matchMedia();
+
+  mm.add("(min-width: 1024px)", () => {
+    initDesktop();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      ctx?.revert();
+    };
+  });
+
+  mm.add("(max-width: 1023px)", () => {
+    activeIndex.value = 0;
+    clearAllInlineStyles();
+
+    return () => {
+      clearAllInlineStyles();
+    };
   });
 });
 
 onUnmounted(() => {
+  clearTimeout(resizeTimer);
+  window.removeEventListener("resize", handleResize);
   ctx?.revert();
-  mm.revert();
+  mm?.revert();
 });
 </script>

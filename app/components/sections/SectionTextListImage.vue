@@ -16,6 +16,7 @@
             noImagePadding
               ? 'py-0 px-0'
               : 'py-10 px-6 flex justify-center items-center',
+            noBg && 'bg-transparent!',
           ]"
         >
           <div>
@@ -35,6 +36,7 @@ const props = defineProps([
   "items",
   "darkImage",
   "noImagePadding",
+  "noBg",
 ]);
 </script>
 
