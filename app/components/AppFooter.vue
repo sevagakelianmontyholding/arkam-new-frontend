@@ -23,7 +23,7 @@
         </div>
         <div class="flex lg:justify-between max-lg:flex-col gap-6 w-full">
           <div>
-            <h5 class="font-bold text-[22px] mb-3">Products</h5>
+            <h5 class="font-bold text-xl mb-3">Products</h5>
             <ul class="space-y-2 text-base">
               <li><NuxtLink to="/">Digital Core Banking</NuxtLink></li>
               <li><NuxtLink to="/">Payments & Transfers</NuxtLink></li>
@@ -37,7 +37,7 @@
           </div>
 
           <div>
-            <h5 class="font-bold text-[22px] mb-3">Information</h5>
+            <h5 class="font-bold text-xl mb-3">Information</h5>
             <ul class="space-y-2 text-base">
               <li><NuxtLink to="/">Architecture & Technology</NuxtLink></li>
               <li><NuxtLink to="/">Security & Compliance</NuxtLink></li>
@@ -48,7 +48,7 @@
           </div>
 
           <div>
-            <h5 class="font-bold text-[22px] mb-3">Company</h5>
+            <h5 class="font-bold text-xl mb-3">Company</h5>
             <ul class="space-y-2 text-base">
               <li><NuxtLink to="/">About Arkam</NuxtLink></li>
               <li><NuxtLink to="/">Case Studies</NuxtLink></li>
@@ -63,10 +63,10 @@
       <div class="divider lg:mt-20! mb-0!"></div>
 
       <div
-        class="flex lg:items-center lg:justify-between max-lg:flex-col gap-6 py-8 max-lg:items-center text-center"
+        class="flex lg:items-center lg:justify-between max-lg:flex-col gap-6 py-8 lg:text-center"
       >
         <Logo />
-        <div class="flex max-lg:flex-col gap-6 text-base">
+        <div class="flex max-lg:flex-col max-lg:gap-2 lg:gap-6 text-base">
           <NuxtLink to="/">Terms</NuxtLink>
           <NuxtLink to="/">Privacy</NuxtLink>
           <NuxtLink to="/">Cookies</NuxtLink>

@@ -1,7 +1,9 @@
 <template>
   <section ref="sectionOne" class="bg-dark-bg lg:min-h-screen">
     <div class="container">
-      <div class="flex max-lg:flex-col-reverse gap-12 lg:justify-between">
+      <div
+        class="flex max-lg:flex-col-reverse lg:gap-12 max-lg:gap-6 lg:justify-between"
+      >
         <div
           ref="clip"
           class="lg:w-[50%] text-white relative lg:h-[75vh] overflow-y-hidden"
@@ -93,7 +95,7 @@
                   </defs>
                 </svg>
               </div>
-              <h5 class="text-3xl">Accounts & Wallets</h5>
+              <h5 class="text-3xl max-lg:text-2xl">Accounts & Wallets</h5>
               <p>
                 Create and manage current, savings and wallet accounts in real
                 time. Support multi-currency balances, instant posting and rich
@@ -168,7 +170,7 @@
                   </defs>
                 </svg>
               </div>
-              <h5 class="text-3xl">Payments & Cards</h5>
+              <h5 class="text-3xl max-lg:text-2xl">Payments & Cards</h5>
               <p>
                 Process domestic and cross-border payments, issue physical and
                 virtual cards, and control limits, PIN, blocks and alerts
@@ -245,7 +247,7 @@
                   </defs>
                 </svg>
               </div>
-              <h5 class="text-3xl">Fees, FX & Accounting</h5>
+              <h5 class="text-3xl max-lg:text-2xl">Fees, FX & Accounting</h5>
               <p>
                 Design tariffs once and apply them everywhere—fees, commissions,
                 FX and interest. The multi-currency engine posts every event to

@@ -16,12 +16,12 @@
         <div
           v-for="(item, index) in items"
           :key="item.id"
-          class="banking-slide max-lg:space-y-8 max-lg:py-10 lg:absolute inset-0 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center"
+          class="banking-slide max-lg:space-y-6 max-lg:py-6 lg:absolute inset-0 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center"
           :class="{ 'pointer-events-none': activeIndex !== index }"
           :ref="(el) => setSlideRef(el, index)"
         >
           <div class="slide-content" :ref="(el) => setContentRef(el, index)">
-            <div class="space-y-6">
+            <div class="max-lg:space-y-4 lg:space-y-6">
               <p>{{ item.number }}</p>
 
               <h3 class="text-3xl text-dark-primary max-lg:text-2xl">
@@ -32,12 +32,12 @@
                 {{ item.description }}
               </p>
 
-              <div class="divider mt-16!"></div>
+              <div class="divider max-lg:hidden lg:mt-16!"></div>
             </div>
           </div>
 
           <div
-            class="slide-image bg-[#F6F9F8] rounded-4xl p-12 w-full h-full flex items-center justify-center"
+            class="slide-image bg-[#F6F9F8] rounded-4xl lg:p-12 w-full h-full flex items-center justify-center"
             :ref="(el) => setImageRef(el, index)"
           >
             <img
