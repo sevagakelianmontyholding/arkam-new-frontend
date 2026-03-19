@@ -123,34 +123,67 @@ const setImageRef = (el, index) => {
   if (el) imageRefs.value[index] = el;
 };
 
-let mm;
-let ctx;
-let resizeTimer;
+let mm = null;
+let ctx = null;
+let resizeTimer = null;
+let initTimer = null;
+
+function resetRefArrays() {
+  slideRefs.value = [];
+  contentRefs.value = [];
+  imageRefs.value = [];
+}
 
 function clearAllInlineStyles() {
-  gsap.set(
-    [
-      bankingSection.value,
-      ...slideRefs.value,
-      ...contentRefs.value,
-      ...imageRefs.value,
-    ],
-    { clearProps: "all" },
-  );
+  const els = [
+    bankingSection.value,
+    ...slideRefs.value,
+    ...contentRefs.value,
+    ...imageRefs.value,
+  ].filter(Boolean);
+
+  gsap.set(els, { clearProps: "all" });
+}
+
+function killOwnScrollTriggers() {
+  const section = bankingSection.value;
+  if (!section) return;
+
+  ScrollTrigger.getAll().forEach((st) => {
+    const trigger = st.trigger;
+    const pin = st.pin;
+
+    if (trigger === section || pin === section) {
+      st.kill();
+    }
+  });
+}
+
+function cleanup() {
+  clearTimeout(resizeTimer);
+  clearTimeout(initTimer);
+  window.removeEventListener("resize", handleResize);
+
+  killOwnScrollTriggers();
+  ctx?.revert();
+  mm?.revert();
+
+  ctx = null;
+  mm = null;
 }
 
 function initDesktop() {
+  const section = bankingSection.value;
+  const slides = slideRefs.value.filter(Boolean);
+  const contents = contentRefs.value.filter(Boolean);
+  const images = imageRefs.value.filter(Boolean);
+
+  if (!section || !slides.length || !contents.length || !images.length) return;
+
+  killOwnScrollTriggers();
   ctx?.revert();
 
   ctx = gsap.context(() => {
-    const section = bankingSection.value;
-    const slides = slideRefs.value;
-    const contents = contentRefs.value;
-    const images = imageRefs.value;
-
-    if (!section || !slides.length) return;
-
-    // Save original styles so matchMedia cleanup can restore properly
     ScrollTrigger.saveStyles([section, ...slides, ...contents, ...images]);
 
     activeIndex.value = 0;
@@ -181,7 +214,6 @@ function initDesktop() {
       });
     });
 
-    const segment = 1; // one timeline unit per panel
     const totalSegments = items.value.length - 1;
 
     const tl = gsap.timeline({
@@ -192,10 +224,9 @@ function initDesktop() {
         end: () => `+=${window.innerHeight * totalSegments}`,
         scrub: 1,
         pin: true,
+        anticipatePin: 1,
         invalidateOnRefresh: true,
-        onRefresh: () => {
-          // Keep progress and measurements fresh after resize
-        },
+        refreshPriority: 1,
         onUpdate: (self) => {
           const raw = self.progress * totalSegments;
           const index = Math.min(
@@ -215,9 +246,8 @@ function initDesktop() {
       const prevSlide = slides[i - 1];
       const nextSlide = slides[i];
 
-      const start = (i - 1) * segment;
+      const start = i - 1;
 
-      // background transition
       tl.to(
         section,
         {
@@ -227,7 +257,6 @@ function initDesktop() {
         start,
       );
 
-      // outgoing
       tl.to(
         prevContent,
         {
@@ -249,7 +278,6 @@ function initDesktop() {
         start,
       );
 
-      // hide previous / show next slightly later
       tl.to(
         prevSlide,
         {
@@ -268,7 +296,6 @@ function initDesktop() {
         start + 0.24,
       );
 
-      // incoming
       tl.fromTo(
         nextContent,
         {
@@ -299,9 +326,9 @@ function initDesktop() {
         start + 0.24,
       );
     }
-
-    ScrollTrigger.refresh();
   }, bankingSection.value);
+
+  ScrollTrigger.refresh();
 }
 
 function handleResize() {
@@ -314,32 +341,41 @@ function handleResize() {
 onMounted(async () => {
   await nextTick();
 
-  mm = gsap.matchMedia();
+  resetRefArrays();
 
-  mm.add("(min-width: 1024px)", () => {
-    initDesktop();
-    window.addEventListener("resize", handleResize);
+  initTimer = setTimeout(() => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        mm = gsap.matchMedia();
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      ctx?.revert();
-    };
-  });
+        mm.add("(min-width: 1024px)", () => {
+          initDesktop();
+          window.addEventListener("resize", handleResize);
 
-  mm.add("(max-width: 1023px)", () => {
-    activeIndex.value = 0;
-    clearAllInlineStyles();
+          return () => {
+            window.removeEventListener("resize", handleResize);
+            killOwnScrollTriggers();
+            ctx?.revert();
+          };
+        });
 
-    return () => {
-      clearAllInlineStyles();
-    };
-  });
+        mm.add("(max-width: 1023px)", () => {
+          activeIndex.value = 0;
+          killOwnScrollTriggers();
+          clearAllInlineStyles();
+
+          return () => {
+            clearAllInlineStyles();
+          };
+        });
+
+        ScrollTrigger.refresh();
+      });
+    });
+  }, 0);
 });
 
 onUnmounted(() => {
-  clearTimeout(resizeTimer);
-  window.removeEventListener("resize", handleResize);
-  ctx?.revert();
-  mm?.revert();
+  cleanup();
 });
 </script>
