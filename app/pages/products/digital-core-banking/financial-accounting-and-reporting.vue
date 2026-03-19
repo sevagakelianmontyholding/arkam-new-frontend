@@ -7,12 +7,10 @@
           real-time visibility for finance and risk teams."
     :button-one="{ link: '/', text: 'Book a Live Demo' }"
     :button-two="{ link: '/', text: 'Contact us' }"
-    image="/images/financial-accounting-and-reporting.webp"
   />
   <SectionTextListImage
     title="Key Points"
     :items="keyPoints"
-    image="/images/financial-accounting-key-points.webp"
     :darkImage="true"
   />
 
