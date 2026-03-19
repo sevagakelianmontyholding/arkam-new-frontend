@@ -20,7 +20,7 @@
           ]"
         >
           <div>
-            <img :src="image" alt="" />
+            <img class="w-full" :src="image" alt="" />
           </div>
         </div>
       </div>

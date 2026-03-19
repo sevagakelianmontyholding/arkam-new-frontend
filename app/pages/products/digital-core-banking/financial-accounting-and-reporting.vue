@@ -22,7 +22,7 @@
     :items="faq"
   />
 
-  <!-- <ArkamCoreBankingInAction /> -->
+  <ArkamCoreBankingInAction />
 </template>
 
 <script setup>

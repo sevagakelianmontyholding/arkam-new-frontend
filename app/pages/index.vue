@@ -1,9 +1,9 @@
 <template>
   <HomeBanner />
-  <!-- <HomeCoreBanking /> -->
-  <!-- <HomeTechnology /> -->
-  <!-- <HomeDBP /> -->
-  <!-- <HomeTrustedBy /> -->
+  <HomeCoreBanking />
+  <HomeTechnology />
+  <HomeDBP />
+  <HomeTrustedBy />
   <HomeFeaturedInsights />
   <HomePlatform />
   <SectionTextList

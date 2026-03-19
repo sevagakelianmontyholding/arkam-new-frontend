@@ -11,7 +11,7 @@
         <div
           class="lg:w-2/3 bg-tertiary max-lg:rounded-2xl rounded-tl-2xl rounded-bl-2xl p-6 lg:pr-0"
         >
-          <img :src="image" />
+          <img class="w-full" :src="image" />
         </div>
       </div>
     </div>

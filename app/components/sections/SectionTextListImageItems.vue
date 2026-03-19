@@ -13,7 +13,7 @@
           <List :dark="dark" :items="item.items" :itemsGrid="item.itemsGrid" />
         </div>
         <div class="w-full">
-          <img class="rounded-2xl" :src="item.image" alt="" />
+          <img class="rounded-2xl w-full" :src="item.image" alt="" />
         </div>
       </div>
     </div>

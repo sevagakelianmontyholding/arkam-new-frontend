@@ -23,7 +23,11 @@
           </div>
         </div>
         <div class="w-full flex items-center justify-center">
-          <img :class="imageMaxWidth && 'max-w-[450px]'" :src="image" />
+          <img
+            class="w-full"
+            :class="imageMaxWidth && 'max-w-[450px]'"
+            :src="image"
+          />
         </div>
       </div>
     </div>
