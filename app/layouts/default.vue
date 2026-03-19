@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <AppHeader @toggle-menu="isMenuOpen = true" /> -->
-    <MenuOverlay v-model="isMenuOpen" />
+    <!-- <MenuOverlay v-model="isMenuOpen" /> -->
     <slot />
     <AppFooter />
   </div>
