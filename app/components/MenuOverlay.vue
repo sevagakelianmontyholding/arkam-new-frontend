@@ -254,11 +254,11 @@ const menuItems = [
     groups: [
       {
         title: "Solutions",
-        links: [
-          { label: "Retail Banking", to: "/solutions/retail-banking" },
-          { label: "Islamic Banking", to: "/solutions/islamic-banking" },
-          { label: "Microfinance", to: "/solutions/microfinance" },
-        ],
+        // links: [
+        //   { label: "Retail Banking", to: "/solutions/retail-banking" },
+        //   { label: "Islamic Banking", to: "/solutions/islamic-banking" },
+        //   { label: "Microfinance", to: "/solutions/microfinance" },
+        // ],
       },
     ],
   },
@@ -267,11 +267,11 @@ const menuItems = [
     groups: [
       {
         title: "Who We Serve",
-        links: [
-          { label: "Banks", to: "/who-we-serve/banks" },
-          { label: "Fintechs", to: "/who-we-serve/fintechs" },
-          { label: "MFIs", to: "/who-we-serve/mfis" },
-        ],
+        // links: [
+        //   { label: "Banks", to: "/who-we-serve/banks" },
+        //   { label: "Fintechs", to: "/who-we-serve/fintechs" },
+        //   { label: "MFIs", to: "/who-we-serve/mfis" },
+        // ],
       },
     ],
   },
@@ -280,11 +280,11 @@ const menuItems = [
     groups: [
       {
         title: "Resources",
-        links: [
-          { label: "Blog", to: "/resources/blog" },
-          { label: "Case Studies", to: "/resources/case-studies" },
-          { label: "Downloads", to: "/resources/downloads" },
-        ],
+        // links: [
+        //   { label: "Blog", to: "/resources/blog" },
+        //   { label: "Case Studies", to: "/resources/case-studies" },
+        //   { label: "Downloads", to: "/resources/downloads" },
+        // ],
       },
     ],
   },
@@ -293,11 +293,11 @@ const menuItems = [
     groups: [
       {
         title: "Company",
-        links: [
-          { label: "About Us", to: "/company/about" },
-          { label: "Careers", to: "/company/careers" },
-          { label: "Contact", to: "/company/contact" },
-        ],
+        // links: [
+        //   { label: "About Us", to: "/company/about" },
+        //   { label: "Careers", to: "/company/careers" },
+        //   { label: "Contact", to: "/company/contact" },
+        // ],
       },
     ],
   },

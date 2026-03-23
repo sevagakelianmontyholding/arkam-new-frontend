@@ -40,7 +40,7 @@ section {
     @apply lg:pt-16 lg:pb-26;
   }
   .heading {
-    @apply lg:space-y-10 max-lg:space-y-4;
+    @apply lg:space-y-6 max-lg:space-y-4;
     &.text-center > p {
       @apply lg:max-w-[80%] lg:mx-auto;
     }

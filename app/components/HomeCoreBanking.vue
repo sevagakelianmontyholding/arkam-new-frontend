@@ -2,7 +2,7 @@
   <section ref="sectionOne" class="bg-dark-bg lg:min-h-screen">
     <div class="container">
       <div
-        class="flex max-lg:flex-col-reverse lg:gap-12 max-lg:gap-6 lg:justify-between"
+        class="flex lg:flex-row-reverse max-lg:flex-col-reverse lg:gap-12 max-lg:gap-6 lg:justify-between"
       >
         <div
           ref="clip"
