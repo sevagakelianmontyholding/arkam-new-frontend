@@ -7,12 +7,12 @@
         class="flex max-lg:flex-col-reverse max-lg:gap-6 lg:gap-24 lg:justify-between lg:items-center"
         :class="index % 2 != 0 && 'lg:flex-row-reverse'"
       >
-        <div class="heading w-full">
+        <div class="heading lg:w-[55%]">
           <h2>{{ item.title }}</h2>
           <p v-html="item.description" />
           <List :dark="dark" :items="item.items" :itemsGrid="item.itemsGrid" />
         </div>
-        <div class="w-full">
+        <div class="w-[45%]">
           <img class="rounded-2xl w-full" :src="item.image" alt="" />
         </div>
       </div>

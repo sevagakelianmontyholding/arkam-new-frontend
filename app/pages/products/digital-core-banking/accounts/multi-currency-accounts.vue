@@ -6,7 +6,7 @@
     :button-two="{ text: 'Contact us', link: '/' }"
   />
 
-  <SectionTextImageFull
+  <SectionTextImage
     title="Multi-Currency Accounts"
     description="Arkam’s Digital Core Banking system enables banks to manage multi-currency balances with consistent controls across channels, operations and finance. The platform supports global account management, instant IBAN allocation, and account segmentation so institutions can scale cross-border propositions while keeping governance, reporting and auditability intact."
     image="/images/multi-currency-accounts.webp"
@@ -17,7 +17,7 @@
 
 <script setup>
 import HeroTextOnly from "../../../../components/hero/HeroTextOnly.vue";
-import SectionTextImageFull from "../../../../components/sections/SectionTextImageFull.vue";
+import SectionTextImage from "../../../../components/sections/SectionTextImage.vue";
 import SectionTextListImageItems from "../../../../components/sections/SectionTextListImageItems.vue";
 
 useSeoMeta({
@@ -63,13 +63,6 @@ const AlternateSections = [
     description:
       "Arkam supports automated IBAN allocation as part of digital onboarding and account creation flows. The platform assigns identifiers according to the institution’s numbering scheme and governance rules—helping banks reduce manual steps, speed up activation, and keep controls auditable.",
     image: "/images/instant-iban-allocation.webp",
-    items: [
-      {
-        title: "Kept intentionally conservative:",
-        description:
-          "“instant IBAN allocation” is framed as automated assignment aligned to the bank’s numbering scheme, without claiming universal country coverage.",
-      },
-    ],
     itemsGrid: [
       {
         title: "Automated IBAN allocation",
