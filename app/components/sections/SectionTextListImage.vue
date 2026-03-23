@@ -4,13 +4,13 @@
       <div
         class="flex max-lg:flex-col lg:items-center lg:gap-24 max-lg:gap-8 lg:justify-between"
       >
-        <div class="heading w-full">
+        <div class="heading max-lg:w-full w-[55%]">
           <h2 v-if="title">{{ title }}</h2>
           <p v-if="description">{{ description }}</p>
           <List :items="items" />
         </div>
         <div
-          class="w-full rounded-4xl overflow-hidden"
+          class="max-lg:w-full lg:w-[45%] rounded-4xl overflow-hidden"
           :class="[
             darkImage ? 'bg-dark-bg' : 'bg-tertiary',
             noImagePadding
