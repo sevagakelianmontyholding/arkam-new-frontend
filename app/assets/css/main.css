@@ -11,6 +11,14 @@ body {
   @apply font-pp-mori font-normal bg-background text-dark-primary;
 }
 
+main {
+  @apply pt-(--header-height);
+}
+
+.no-top-padding main {
+  @apply lg:pt-0;
+}
+
 p {
   @apply text-lg max-lg:text-base text-pretty;
 }
@@ -35,7 +43,7 @@ h4 {
 }
 
 section {
-  @apply lg:py-26 max-lg:py-10 relative;
+  @apply lg:py-26 max-lg:py-10 relative overflow-hidden;
   &.hero {
     @apply lg:pt-16 lg:pb-26;
   }

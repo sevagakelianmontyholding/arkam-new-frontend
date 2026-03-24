@@ -266,12 +266,13 @@ const menuItems = [
     label: "Who We Serve",
     groups: [
       {
-        title: "Who We Serve",
-        // links: [
-        //   { label: "Banks", to: "/who-we-serve/banks" },
-        //   { label: "Fintechs", to: "/who-we-serve/fintechs" },
-        //   { label: "MFIs", to: "/who-we-serve/mfis" },
-        // ],
+        title: "Retail Bank",
+        links: [
+          {
+            label: "Digital Onboarding",
+            to: "/who-we-serve/retail-bank/digital-onboarding",
+          },
+        ],
       },
     ],
   },

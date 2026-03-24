@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div :class="{ 'no-top-padding': noTopPadding }">
     <AppHeader @toggle-menu="isMenuOpen = true" />
     <MenuOverlay v-model="isMenuOpen" />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <AppFooter />
   </div>
 </template>
@@ -11,4 +13,9 @@
 import { ref } from "vue";
 
 const isMenuOpen = ref(false);
+const route = useRoute();
+
+const noTopPadding = computed(() => {
+  return route.meta.noTopPadding === true;
+});
 </script>
