@@ -45,6 +45,7 @@ The solution is built as a containerised microservices architecture on Kubernete
   <SectionTextHalfSlider
     title="Digital Signature"
     description="Electronic signature capability is crucial for capturing consent and authorization in digital banking."
+    :sliderItems="sliderItems"
   />
 
   <SectionTextList
@@ -169,6 +170,30 @@ const faq = [
       "Can we integrate with third-party KYC/AML, e-signature and identity providers?",
     description:
       "Yes. Arkam is integration-first and provides integration points so onboarding and compliance checks can connect to approved tools and follow defined policies.",
+  },
+];
+
+const sliderItems = [
+  {
+    title:
+      "Integration with recognized digital signature platforms (eIDAS, ESIGN, etc.)",
+    description:
+      "Supports compliant digital signatures for agreements, disclosures, and terms & conditions using OTPs, certificates, or biometric authentication.",
+  },
+  {
+    title: "Secure storage, timestamping & customer profile linkage",
+    description:
+      "Signed data is timestamped, stored securely, and attached to the customer’s profile for future reference.",
+  },
+  {
+    title: "Flexible delivery across onboarding and channels",
+    description:
+      "Supports compliant digital signatures for agreements, disclosures, and terms & conditions using OTPs, certificates, or biometric authentication.",
+  },
+  {
+    title: "Full auditability, revocation support & compliance documentation",
+    description:
+      "Ensures banks meet legal and operational requirements with minimal friction.",
   },
 ];
 </script>
