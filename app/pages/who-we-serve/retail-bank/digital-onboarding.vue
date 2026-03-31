@@ -71,6 +71,18 @@ import SectionTextImageGrid from "../../../components/sections/SectionTextImageG
 import SectionTextTabs from "../../../components/sections/SectionTextTabs.vue";
 import SectionTextList from "../../../components/sections/SectionTextList.vue";
 import SectionCTABanner from "../../../components/sections/SectionCTABanner.vue";
+
+useSeoMeta({
+  title: "Arkam - Digital Onboarding That Balances Speed and Compliance",
+  ogTitle: "Arkam - Digital Onboarding That Balances Speed and Compliance",
+  description:
+    "Arkam helps institutions digitise client onboarding without compromising governance. The platform orchestrates onboarding steps and integrates with KYC/AML and identity services so customer enrollment follows defined policies and remains auditable.",
+  ogDescription:
+    "Arkam helps institutions digitise client onboarding without compromising governance. The platform orchestrates onboarding steps and integrates with KYC/AML and identity services so customer enrollment follows defined policies and remains auditable.",
+  // ogImage: "https://example.com/image.png",
+  // twitterCard: "summary_large_image",
+});
+
 definePageMeta({
   noTopPadding: true,
 });
