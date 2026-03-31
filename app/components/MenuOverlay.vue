@@ -281,10 +281,6 @@ const menuItems = [
             label: "Wallet-Led Digital Onboarding",
             to: "/who-we-serve/neo-banks-and-fintechs/wallet-led-digital-onboarding",
           },
-          {
-            label: "Wallet-Led Digital Onboarding",
-            to: "/who-we-serve/neo-banks-and-fintechs/wallet-led-digital-onboarding",
-          },
         ],
       },
     ],
