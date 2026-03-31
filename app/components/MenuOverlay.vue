@@ -274,6 +274,15 @@ const menuItems = [
           },
         ],
       },
+      {
+        title: "Neo‑Banks & Fintechs",
+        links: [
+          {
+            label: "Wallet-Led Digital Onboarding",
+            to: "/who-we-serve/neo-banks-and-fintechs/wallet-led-digital-onboarding",
+          },
+        ],
+      },
     ],
   },
   {
