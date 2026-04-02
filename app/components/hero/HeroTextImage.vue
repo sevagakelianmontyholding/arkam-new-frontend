@@ -3,7 +3,7 @@
     <div
       class="container flex max-lg:flex-col lg:justify-between lg:gap-32 max-lg:gap-6 items-center"
     >
-      <div class="heading w-full">
+      <div class="heading max-lg:w-full lg:w-[55%]">
         <h1>{{ title }}</h1>
         <p>{{ description }}</p>
         <div v-if="buttonOne || buttonTwo" class="flex max-lg:flex-col gap-6">
@@ -21,7 +21,7 @@
           >
         </div>
       </div>
-      <div class="w-full">
+      <div class="max-lg:w-full lg:w-[45%]">
         <img :src="image" />
       </div>
     </div>
